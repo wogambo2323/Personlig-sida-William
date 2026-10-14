@@ -1,0 +1,642 @@
+/* ==========================================================================
+   WILLIAM ERIKSSON · PERSONAL BRAND
+   Inspiration:
+   - fargkoder.png: Paper (#F6F4F1), Stone (#E4DED2), Coral (#F95C4B), Black (#000000)
+   - Pinterest.png (Sevora): Lyxig editorial typografi, Master Hero Card, runda pill-knappar, statistik-rad
+   - Awwwards.png (The Tie-break): Tunna geometriska grid-streck och mjuk atmosfärisk bakgrund
+   ========================================================================== */
+
+/* Importera Google Fonts: Playfair Display (rubriker) & Plus Jakarta Sans (brödtext) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* 1 · Box-modellen: bredden gäller hela lådan */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2 · Varumärket som variabler (Exakta färgkoder från färgpaletten) */
+:root {
+    /* Färgkoderna från inspirationsbilden */
+    --farg-paper: #F6F4F1;
+    /* Paper: mjuk och varm grundfärg för hela sidan */
+    --farg-stone: #E4DED2;
+    /* Stone: varm neutral sandton för kort och ytor */
+    --farg-coral: #F95C4B;
+    /* Coral: energisk signaturfärg för accenter och detaljer */
+    --farg-coral-hover: #e04635;
+    /* Lite mörkare korall vid muspekare */
+    --farg-black: #000000;
+    /* Black: djupaste svarta för knappar och skarp text */
+
+    /* Användbara variabler för layout och kontrast */
+    --text: #111111;
+    /* Huvudtext med maximal läsbarhet (WCAG > 14:1) */
+    --text-dampad: #555149;
+    /* Mjukare dämpad text för ingress och detaljer (WCAG > 5:1) */
+    --yta: var(--farg-paper);
+    /* Bakgrund på sidan */
+    --yta-kort: var(--farg-stone);
+    /* Ytan på kort och moduler */
+    --yta-inre: #fbf9f6;
+    /* Ljus krispig yta för inre kort */
+    --primar: var(--farg-black);
+    /* Rubrikfärg */
+    --accent: var(--farg-coral);
+    /* Signaturaccent */
+    --kant: #d5cebf;
+    /* Tunn linjefärg (inspiration från Awwwards-strecken) */
+    --kant-subtil: rgba(0, 0, 0, 0.07);
+    /* Ytterst diskret linje */
+
+    /* Typografi (hämtad från Sevora / Pinterest och Awwwards) */
+    --typsnitt-rubrik: "Playfair Display", Georgia, serif;
+    --typsnitt-brodtext: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+    /* Former och rymd */
+    --luft: 1rem;
+    --radie-stor: 28px;
+    /* Stor mjuk hörnradie för Hero-kortet (som i Sevora) */
+    --radie: 18px;
+    /* Hörnradie för kort och moduler */
+    --radie-knapp: 999px;
+    /* Helt runda pill-knappar som i Sevora och färgkoderna */
+    --skugga: 0 8px 30px rgba(0, 0, 0, 0.04);
+    --skugga-kort: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* 3 · Grundstil och bakgrund (Mobilversion först) */
+body {
+    margin: 0;
+    font-family: var(--typsnitt-brodtext);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text);
+    background-color: var(--yta);
+    /* Mjuk och dov atmosfärisk bakgrund inspirerad av Awwwards */
+    background-image:
+        radial-gradient(circle at 12% 12%, rgba(228, 222, 210, 0.65) 0%, transparent 45%),
+        radial-gradient(circle at 88% 28%, rgba(249, 92, 75, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(228, 222, 210, 0.5) 0%, transparent 50%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--typsnitt-rubrik);
+    line-height: 1.25;
+    color: var(--primar);
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.1rem;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 1.85rem;
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    max-width: 65ch;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primar);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radie);
+}
+
+/* Liten etikett ovanför rubriker (kicker) */
+.kicker {
+    display: inline-block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+
+/* 4 · Sidhuvud och navigation */
+.sidhuvud {
+    display: flex;
+    flex-direction: column;
+    gap: var(--luft);
+    padding: calc(var(--luft) * 1.25) calc(var(--luft) * 1.5);
+    background: rgba(246, 244, 241, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--kant);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-namn {
+    font-family: var(--typsnitt-rubrik);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--farg-black);
+    letter-spacing: -0.01em;
+}
+
+.roll {
+    margin: 0;
+    color: var(--text-dampad);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--accent);
+}
+
+/* 5 · Hero-sektionen (Sevora Master Card & Awwwards-linjer) */
+main {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--luft) * 1.25);
+}
+
+.hero-sektion {
+    padding: calc(var(--luft) * 2) 0 calc(var(--luft) * 3) 0;
+}
+
+/* Det stora rundade Master Card-kortet som i Sevora */
+.hero-kort {
+    background: var(--farg-stone);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie-stor);
+    padding: calc(var(--luft) * 2);
+    box-shadow: var(--skugga);
+    position: relative;
+    overflow: hidden;
+}
+
+/* De tunna arkitektoniska linjerna från Awwwards som skär över hero-ytan */
+.hero-kort::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 55%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.08) 15%, rgba(0, 0, 0, 0.08) 85%, transparent);
+    pointer-events: none;
+}
+
+.hero-kort::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08) 10%, rgba(0, 0, 0, 0.08) 90%, transparent);
+    pointer-events: none;
+}
+
+.hero-innehall {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--luft) * 2);
+    position: relative;
+    z-index: 2;
+}
+
+/* Tvådelad rubrik som i Sevora ("Design Better / Faster Smarter") */
+.hero-rubrik {
+    margin: 0 0 1rem 0;
+    line-height: 1.15;
+}
+
+.hero-rubrik-rad1 {
+    display: block;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--farg-black);
+    letter-spacing: -0.02em;
+}
+
+.hero-rubrik-rad2 {
+    display: block;
+    font-size: 1.85rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-dampad);
+    letter-spacing: -0.01em;
+    margin-top: 0.25rem;
+}
+
+.hero-text {
+    font-size: 1.1rem;
+    color: var(--text-dampad);
+    max-width: 52ch;
+    margin-bottom: 1.75rem;
+}
+
+.hero-knappar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: calc(var(--luft) * 2);
+}
+
+/* Statistik- och fokusrad inspirerad av Sevora */
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: calc(var(--luft) * 1.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* Tunn Awwwards-linje */
+    max-width: 32rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-nummer {
+    font-family: var(--typsnitt-rubrik);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--farg-black);
+    line-height: 1.1;
+}
+
+.stat-etikett {
+    font-size: 0.8rem;
+    color: var(--text-dampad);
+    margin-top: 0.2rem;
+}
+
+/* Profilbild med svävande statusbadge som i Sevora */
+.hero-bild-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+.hero-bild {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radie);
+    border: 1px solid var(--kant);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Svävande badge inspirerad av Sevora */
+.status-badge {
+    position: absolute;
+    bottom: -15px;
+    left: 15px;
+    right: 15px;
+    background: rgba(246, 244, 241, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--radie);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.status-prick {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(249, 92, 75, 0.2);
+    flex-shrink: 0;
+}
+
+.status-text strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--farg-black);
+}
+
+.status-text span {
+    font-size: 0.75rem;
+    color: var(--text-dampad);
+}
+
+/* 6 · Sektioner och kort i rutnät */
+section {
+    padding: calc(var(--luft) * 3) 0;
+    border-bottom: 1px solid var(--kant);
+    /* Tunn Awwwards-avgränsare */
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+.sektion-rubrik {
+    margin-bottom: calc(var(--luft) * 1.5);
+}
+
+/* Rutnät för kort med CSS Grid */
+.rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: calc(var(--luft) * 1.5);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Kort med Stone-bakgrund och mjuka hörn som i Sevora */
+.kort {
+    background: var(--yta-kort);
+    padding: calc(var(--luft) * 1.75);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    box-shadow: var(--skugga-kort);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.kort:hover {
+    transform: translateY(-4px);
+    border-color: var(--farg-black);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.kort-nummer {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.kort h3 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    color: var(--farg-black);
+}
+
+.kort p {
+    color: var(--text-dampad);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* Handbolls-sektionen som ett framhävt modulblock */
+.handboll-kort {
+    background: var(--farg-stone);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    padding: calc(var(--luft) * 2);
+    box-shadow: var(--skugga-kort);
+    position: relative;
+}
+
+/* 7 · Projekt, knappar och fokus (Tillgänglighet) */
+.projekt-rutnat {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: calc(var(--luft) * 1.5);
+}
+
+.projekt-kort {
+    background: var(--yta-kort);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    overflow: hidden;
+    box-shadow: var(--skugga-kort);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.projekt-kort:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.projekt-bild {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-bottom: 1px solid var(--kant);
+    border-radius: 0;
+}
+
+.projekt-info {
+    padding: calc(var(--luft) * 1.5);
+}
+
+.projekt-info h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.projekt-info p {
+    color: var(--text-dampad);
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Pill-knappar inspirerade av Sevora och färgkoderna */
+.knapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    font-family: var(--typsnitt-brodtext);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--radie-knapp);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* Svart primärknapp som i Sevora ("Start a project" / "View projects") */
+.knapp-svart {
+    background: var(--farg-black);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.knapp-svart:hover {
+    background: #222222;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Sekundär knapp med tunn kantlinje som i Sevora ("Get in touch") */
+.knapp-outline {
+    background: transparent;
+    color: var(--farg-black);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.knapp-outline:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: var(--farg-black);
+    color: var(--farg-black);
+    transform: translateY(-2px);
+}
+
+.knapp-liten {
+    padding: 0.55rem 1.25rem;
+    font-size: 0.85rem;
+}
+
+/* Tydlig fokusram vid tangentbordsnavigering enligt tillgänglighetskraven */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Kontaktsektion */
+.kontakt-box {
+    background: var(--farg-stone);
+    border: 1px solid var(--kant);
+    border-radius: var(--radie);
+    padding: calc(var(--luft) * 2.5);
+    text-align: center;
+    box-shadow: var(--skugga-kort);
+}
+
+.kontakt-lankar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Sidfot */
+footer {
+    padding: calc(var(--luft) * 3) calc(var(--luft) * 1.5);
+    text-align: center;
+    background: var(--farg-stone);
+    border-top: 1px solid var(--kant);
+    font-size: 0.95rem;
+    color: var(--text-dampad);
+    margin-top: calc(var(--luft) * 2);
+}
+
+footer p {
+    margin: 0 auto;
+}
+
+/* 8 · Större skärmar (Responsiv anpassning för surfplatta och dator) */
+@media (min-width: 52rem) {
+    .sidhuvud {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: calc(var(--luft) * 1.25) calc(var(--luft) * 3);
+    }
+
+    .hero-sektion {
+        padding: calc(var(--luft) * 3) 0 calc(var(--luft) * 4) 0;
+    }
+
+    .hero-kort {
+        padding: calc(var(--luft) * 3.5) calc(var(--luft) * 3.5);
+    }
+
+    .hero-innehall {
+        display: grid;
+        grid-template-columns: 1.25fr 0.9fr;
+        align-items: center;
+        gap: calc(var(--luft) * 3.5);
+    }
+
+    .hero-rubrik-rad1 {
+        font-size: 3.2rem;
+    }
+
+    .hero-rubrik-rad2 {
+        font-size: 2.2rem;
+    }
+
+    .hero-bild-wrap {
+        max-width: 380px;
+        margin: 0 0 0 auto;
+    }
+
+    .hero-bild {
+        aspect-ratio: 4 / 5;
+    }
+
+    .om-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: calc(var(--luft) * 3);
+        align-items: start;
+    }
+
+    h1 {
+        font-size: 2.75rem;
+    }
+
+    h2 {
+        font-size: 2.25rem;
+    }
+}

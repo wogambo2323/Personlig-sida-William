@@ -640,3 +640,446 @@ footer p {
         font-size: 2.25rem;
     }
 }
+
+/* Min resa */
+.resa {
+    --resa-accent: #6d42c7;
+    --resa-text: #242033;
+    --resa-muted: #625c70;
+    --resa-line: #e2d9f3;
+
+    max-width: 960px;
+    margin-inline: auto;
+    padding: 80px 24px;
+    color: var(--resa-text);
+}
+
+.resa-intro {
+    max-width: 620px;
+    margin-bottom: 40px;
+}
+
+.resa-intro .kicker {
+    color: var(--resa-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.resa-intro h2 {
+    margin: 12px 0 16px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+}
+
+.resa-intro p,
+.resa-kort p {
+    color: var(--resa-muted);
+    line-height: 1.75;
+}
+
+.resa-tidslinje {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.resa-steg {
+    position: relative;
+    margin: 0;
+    padding: 0 0 28px 44px;
+}
+
+/* Linjen mellan punkterna */
+.resa-steg:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    bottom: -22px;
+    left: 9px;
+    width: 2px;
+    background: var(--resa-line);
+}
+
+/* Punkten vid varje kort */
+.resa-steg::after {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    border: 3px solid var(--resa-accent);
+    border-radius: 50%;
+    background: #fff;
+}
+
+.resa-kort {
+    padding: 26px 30px;
+    border: 1px solid #e9e3f1;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 6px 24px rgb(36 32 51 / 4%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resa-etikett {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--resa-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.resa-kort h3 {
+    margin: 0 0 10px;
+    font-size: 1.25rem;
+    line-height: 1.35;
+}
+
+.resa-kort p {
+    margin: 0;
+}
+
+/* Markerar din pågående utbildning */
+.resa-steg-nu .resa-kort {
+    border-color: var(--resa-accent);
+    background: #f8f5ff;
+}
+
+.resa-steg-nu::after {
+    background: var(--resa-accent);
+    box-shadow: 0 0 0 5px #eee7fb;
+}
+
+@media (hover: hover) {
+    .resa-kort:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgb(36 32 51 / 9%);
+    }
+}
+
+/* Anpassning för mobil */
+@media (max-width: 600px) {
+    .resa {
+        padding: 56px 20px;
+    }
+
+    .resa-steg {
+        padding-left: 32px;
+    }
+
+    .resa-kort {
+        padding: 22px 20px;
+    }
+}
+
+/* Respekterar inställningar för minskad rörelse */
+@media (prefers-reduced-motion: reduce) {
+    .resa-kort {
+        transition: none;
+    }
+
+    .resa-kort:hover {
+        transform: none;
+    }
+}
+
+.resa {
+    --resa-accent: #F95C4B;
+    --resa-line: #F95C4B;
+}
+
+.resa-intro h2,
+.resa-intro .kicker,
+.resa-kort h3 {
+    color: #F95C4B;
+}
+
+/* Kontakt – mejl och LinkedIn */
+#kontakt.kontakt {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    border: 0;
+    background: transparent;
+}
+
+#kontakt.kontakt,
+#kontakt.kontakt * {
+    box-sizing: border-box;
+}
+
+#kontakt .kontakt-direkt {
+    padding: clamp(32px, 6vw, 72px);
+    border: 1px solid #d3cbbb;
+    border-radius: 32px;
+    background: #E4DED2;
+    color: #000;
+    text-align: center;
+    box-shadow: 0 16px 40px rgb(0 0 0 / 6%);
+}
+
+#kontakt .kontakt-kicker {
+    color: #F95C4B;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+#kontakt .kontakt-direkt h2 {
+    max-width: 20ch;
+    margin: 20px auto;
+    color: #000;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.15;
+}
+
+#kontakt .kontakt-direkt p {
+    max-width: 52ch;
+    margin: 0 auto;
+    color: #55514b;
+    line-height: 1.8;
+}
+
+#kontakt .kontakt-knappar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+#kontakt .kontakt-knappar a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 28px;
+    border: 1px solid #000;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#kontakt .kontakt-mailknapp {
+    background: #000;
+    color: #fff;
+}
+
+#kontakt .kontakt-mailknapp span {
+    color: #F95C4B;
+}
+
+#kontakt .kontakt-linkedin-knapp {
+    background: transparent;
+    color: #000;
+}
+
+#kontakt .kontakt-knappar a:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 5px;
+}
+
+@media (hover: hover) {
+    #kontakt .kontakt-knappar a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgb(0 0 0 / 12%);
+    }
+
+    #kontakt .kontakt-linkedin-knapp:hover {
+        background: #F6F4F1;
+    }
+}
+
+@media (max-width: 600px) {
+    #kontakt.kontakt {
+        padding: 40px 16px;
+    }
+
+    #kontakt .kontakt-direkt {
+        border-radius: 24px;
+    }
+
+    #kontakt .kontakt-knappar {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #kontakt .kontakt-knappar a {
+        transition: none;
+    }
+
+    #kontakt .kontakt-knappar a:hover {
+        transform: none;
+    }
+}
+
+/* Formulär under mejl- och LinkedIn-knapparna */
+#kontakt .kontakt-meddelande {
+    display: grid;
+    gap: 22px;
+    width: 100%;
+    max-width: 680px;
+    margin: 40px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid #b9b2a6;
+    text-align: left;
+}
+
+#kontakt .kontakt-meddelande h3 {
+    margin: 0;
+    color: #000;
+    font-size: 1.6rem;
+}
+
+#kontakt .kontakt-rad {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+#kontakt .kontakt-falt {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
+
+#kontakt .kontakt-falt label {
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#kontakt .kontakt-falt input,
+#kontakt .kontakt-falt textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #aaa295;
+    border-radius: 14px;
+    background: #F6F4F1;
+    color: #000;
+    font: inherit;
+    font-size: 1rem;
+}
+
+#kontakt .kontakt-falt textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+#kontakt .kontakt-falt input::placeholder,
+#kontakt .kontakt-falt textarea::placeholder {
+    color: #706a62;
+}
+
+#kontakt .kontakt-falt input:focus,
+#kontakt .kontakt-falt textarea:focus {
+    border-color: #F95C4B;
+    outline: 2px solid #F95C4B;
+    outline-offset: 3px;
+}
+
+#kontakt .kontakt-information {
+    color: #55514b;
+    line-height: 1.6;
+}
+
+#kontakt .kontakt-skicka {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#kontakt .kontakt-skicka span.knapp-pil,
+#kontakt .kontakt-skicka span[aria-hidden="true"] {
+    color: #F95C4B;
+    font-size: 1.3rem;
+    transition: transform 0.2s ease;
+}
+
+#kontakt .kontakt-skicka .knapp-text {
+    color: #fff;
+}
+
+#kontakt .kontakt-skicka:hover span.knapp-pil {
+    transform: translate(2px, -2px);
+}
+
+#kontakt .kontakt-skicka:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#kontakt .kontakt-status {
+    display: none;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+#kontakt .kontakt-status.synlig {
+    display: block;
+    animation: fadeStatusIn 0.3s ease;
+}
+
+#kontakt .kontakt-status.success {
+    background: #eef7ee;
+    color: #1b5e20;
+    border: 1px solid #c8e6c9;
+}
+
+#kontakt .kontakt-status.error {
+    background: #fdf2f2;
+    color: #b71c1c;
+    border: 1px solid #ffcdd2;
+}
+
+@keyframes fadeStatusIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#kontakt .kontakt-skicka:hover {
+    background: #292929;
+}
+
+#kontakt .kontakt-skicka:focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 5px;
+}
+
+@media (max-width: 600px) {
+    #kontakt .kontakt-rad {
+        grid-template-columns: 1fr;
+    }
+}
